@@ -1,0 +1,28 @@
+name: entity_extraction_app
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # todo-01-init-01: add dependency
+  provider: ^6.1.2
+  google_ml_kit: 
+  # todo-04-launcher-01: add dependency
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
