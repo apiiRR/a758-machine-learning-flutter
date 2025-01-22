@@ -42,12 +42,7 @@
             <data android:mimeType="text/plain"/>
         </intent>
 
-        <!-- Provide required visibility configuration for API level 30 and above -->
-        <!-- If your app checks for SMS support -->
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="sms" />
-        </intent>
+        <!-- todo-04-launcher-02: Provide required visibility configuration for API level 30 and above -->
         <!-- If your app checks for call support -->
         <intent>
             <action android:name="android.intent.action.VIEW" />

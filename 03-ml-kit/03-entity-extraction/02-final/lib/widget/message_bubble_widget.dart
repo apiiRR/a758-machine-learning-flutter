@@ -1,4 +1,5 @@
 import 'package:entity_extraction_app/controller/message_provider.dart';
+import 'package:entity_extraction_app/service/entity_extraction_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -59,7 +60,9 @@ class MessageBubble extends StatelessWidget {
               ),
               // todo-02-controller-05: add controller before it calls
               child: ChangeNotifierProvider(
-                create: (context) => MessageProvider(context.read()),
+                create: (context) =>
+                    MessageProvider(context.read<EntityExtractionService>())
+                      ..extractText(content),
                 child: MessageBubbleText(text: content),
               ),
             ),
@@ -70,8 +73,7 @@ class MessageBubble extends StatelessWidget {
   }
 }
 
-// todo-03-run-01: change it into StatefulWidget
-class MessageBubbleText extends StatefulWidget {
+class MessageBubbleText extends StatelessWidget {
   final String text;
   const MessageBubbleText({
     super.key,
@@ -79,33 +81,17 @@ class MessageBubbleText extends StatefulWidget {
   });
 
   @override
-  State<MessageBubbleText> createState() => _MessageBubbleTextState();
-}
-
-class _MessageBubbleTextState extends State<MessageBubbleText> {
-  // todo-03-run-02: setup initState and run the extracting text
-  @override
-  void initState() {
-    super.initState();
-
-    final provider = context.read<MessageProvider>();
-    Future.microtask(() {
-      provider.extractText(widget.text);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // todo-03-run-03: consume the state via Consumer
+    // todo-03-run-01: consume the state via Consumer
     return Consumer<MessageProvider>(
       builder: (context, value, child) {
-        // todo-03-run-04: set the loading widget based on the state
+        // todo-03-run-02: set the loading widget based on the state
         final isExtracting = value.isExtracting;
         if (isExtracting) {
           return Center(child: LinearProgressIndicator());
         }
 
-        // todo-03-run-05: change the Text widget into RichText
+        // todo-03-run-03: change the Text widget into RichText
         final listOfEntityAnnotation = value.listOfEntityAnnotation;
         return RichText(
           text: TextSpan(
@@ -122,37 +108,34 @@ class _MessageBubbleTextState extends State<MessageBubbleText> {
     int i = 0;
     int pos = 0;
 
-    while (i < widget.text.length) {
-      textSpans.add(_text(widget.text.substring(
+    while (i < text.length) {
+      textSpans.add(_text(text.substring(
           i,
           pos < entities.length && i <= entities[pos].start
               ? entities[pos].start
-              : widget.text.length)));
+              : text.length)));
       if (pos < entities.length && i <= entities[pos].start) {
-        textSpans.add(_link(
-            widget.text.substring(entities[pos].start, entities[pos].end),
+        textSpans.add(_text(
+            text.substring(entities[pos].start, entities[pos].end),
             entities[pos].entities.first.type.name));
         i = entities[pos].end;
         pos++;
       } else {
-        i = widget.text.length;
+        i = text.length;
       }
     }
     return textSpans;
   }
 
-  TextSpan _text(String text) {
-    return TextSpan(text: text, style: TextStyle(color: Colors.black));
-  }
-
-  TextSpan _link(String text, String type) {
+  TextSpan _text(String text, [String? type]) {
+    final withoutType = type == null;
     return TextSpan(
       text: text,
-      style: TextStyle(color: Colors.blue),
+      style: TextStyle(color: withoutType ? Colors.black : Colors.blue),
       // todo-04-launcher-04: add a gesture action
-      recognizer: TapGestureRecognizer()
-        ..onTap = () {
-          _entityAction(text, type);
+      recognizer: withoutType ? null : TapGestureRecognizer()
+        ?..onTap = () {
+          _entityAction(text, type!);
         },
     );
   }

@@ -24,5 +24,9 @@ class MessageProvider extends ChangeNotifier {
     _isExtracting = false;
     notifyListeners();
     print(listOfEntityAnnotation);
+    
+    _close();
   }
+
+  void _close() async => await _service.close();
 }

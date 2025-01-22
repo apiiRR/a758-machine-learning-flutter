@@ -29,5 +29,5 @@ class EntityExtractionService {
     return annotateText;
   }
 
-  
+  Future<void> close() => _entityExtractor.close();
 }
