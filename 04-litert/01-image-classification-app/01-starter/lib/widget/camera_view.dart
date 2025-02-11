@@ -24,18 +24,16 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
 
   CameraController? controller;
 
-  bool _isBackCameraSelected = true;
-
   bool _isProcessing = false;
 
   Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {
     final previousCameraController = controller;
     final cameraController = CameraController(
       cameraDescription,
-      ResolutionPreset.max,
+      ResolutionPreset.medium,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
-          ? ImageFormatGroup.nv21
+          ? ImageFormatGroup.yuv420
           : ImageFormatGroup.bgra8888,
     );
     await previousCameraController?.dispose();
@@ -119,38 +117,8 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        _isCameraInitialized
-            ? CameraPreview(controller!)
-            : const Center(child: CircularProgressIndicator()),
-        Align(
-          alignment: const Alignment(0.9, 0.9),
-          child: FloatingActionButton(
-            heroTag: "switch-camera",
-            tooltip: "Switch Camera",
-            onPressed: () => _onCameraSwitch(),
-            child: const Icon(Icons.cameraswitch),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _onCameraSwitch() {
-    if (_cameras.length == 1) return;
-
-    setState(() {
-      _isCameraInitialized = false;
-    });
-
-    onNewCameraSelected(
-      _cameras[_isBackCameraSelected ? 1 : 0],
-    );
-
-    setState(() {
-      _isBackCameraSelected = !_isBackCameraSelected;
-    });
+    return _isCameraInitialized
+        ? CameraPreview(controller!)
+        : const Center(child: CircularProgressIndicator());
   }
 }

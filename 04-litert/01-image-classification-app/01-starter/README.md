@@ -1,3 +1,3 @@
-# image_classification_app
+# tflite_vision_app
 
 A new Flutter project.

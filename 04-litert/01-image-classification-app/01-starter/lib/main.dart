@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_classification_app/ui/home_page.dart';
+import 'package:tflite_vision_app/ui/home_page.dart';
 
 void main() {
   runApp(const MyApp());

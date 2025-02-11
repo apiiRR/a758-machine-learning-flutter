@@ -1,4 +1,4 @@
-name: image_classification_app
+name: tflite_vision_app
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0

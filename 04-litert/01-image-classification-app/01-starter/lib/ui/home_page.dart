@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_classification_app/widget/camera_view.dart';
+import 'package:tflite_vision_app/widget/camera_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -13,7 +13,12 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Image Classification App'),
       ),
-      body: _HomeBody(),
+      body: ColoredBox(
+        color: Colors.black,
+        child: Center(
+          child: _HomeBody(),
+        ),
+      ),
     );
   }
 }
@@ -23,11 +28,9 @@ class _HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Expanded(
-          child: CameraView(),
-        ),
+        CameraView(),
       ],
     );
   }

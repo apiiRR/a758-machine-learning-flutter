@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_classification_app/services/image_classification_service.dart';
+import 'package:tflite_vision_app/services/image_classification_service.dart';
 
 // todo-04-viewmodel-01: create a viewmodel notifier
 class ImageClassificationViewmodel extends ChangeNotifier {
