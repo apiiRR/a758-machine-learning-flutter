@@ -5,10 +5,12 @@ import 'package:image/image.dart' as image_lib;
 class ImageUtils {
   // Converts a [CameraImage] in YUV420 format to [imageLib.Image] in RGB format
   static image_lib.Image? convertCameraImage(CameraImage cameraImage) {
-    return switch (cameraImage.format.group) {
+    final imageFormatGroup = cameraImage.format.group;
+    return switch (imageFormatGroup) {
       ImageFormatGroup.nv21 => convertNV21ToImage(cameraImage),
       ImageFormatGroup.yuv420 => convertYUV420ToImage(cameraImage),
       ImageFormatGroup.bgra8888 => convertBGRA8888ToImage(cameraImage),
+      ImageFormatGroup.jpeg => convertJPEGToImage(cameraImage),
       _ => null,
     };
   }
@@ -75,61 +77,31 @@ class ImageUtils {
     return image;
   }
 
-  static image_lib.Image convertNV21ToImage(CameraImage image) {
-    final width = image.width.toInt();
-    final height = image.height.toInt();
-    final yuv420sp = image.planes[0].bytes;
+  static image_lib.Image convertJPEGToImage(CameraImage cameraImage) {
+    // Extract the bytes from the CameraImage
+    final bytes = cameraImage.planes[0].bytes;
 
-    // Initial conversion from NV21 to RGB
-    final outImg = image_lib.Image(
-      width: height,
-      height: width,
-    ); // Note the swapped dimensions
-    final int frameSize = width * height;
+    // Create a new Image instance from the JPEG bytes
+    final image = image_lib.decodeImage(bytes);
 
-    for (int j = 0, yp = 0; j < height; j++) {
-      int uvp = frameSize + (j >> 1) * width, u = 0, v = 0;
-      for (int i = 0; i < width; i++, yp++) {
-        int y = (0xff & yuv420sp[yp]) - 16;
-        if (y < 0) y = 0;
-        if ((i & 1) == 0) {
-          v = (0xff & yuv420sp[uvp++]) - 128;
-          u = (0xff & yuv420sp[uvp++]) - 128;
-        }
-        int y1192 = 1192 * y;
-        int r = (y1192 + 1634 * v);
-        int g = (y1192 - 833 * v - 400 * u);
-        int b = (y1192 + 2066 * u);
+    return image!;
+  }
 
-        if (r < 0) {
-          r = 0;
-        } else if (r > 262143) {
-          r = 262143;
-        }
-        if (g < 0) {
-          g = 0;
-        } else if (g > 262143) {
-          g = 262143;
-        }
-        if (b < 0) {
-          b = 0;
-        } else if (b > 262143) {
-          b = 262143;
-        }
-        
+  static image_lib.Image convertNV21ToImage(CameraImage cameraImage) {
+    final width = cameraImage.width;
+    final height = cameraImage.height;
 
-        outImg.setPixelRgb(
-          j,
-          width - i - 1,
-          ((r << 6) & 0xff0000) >> 16,
-          ((g >> 2) & 0xff00) >> 8,
-          (b >> 10) & 0xff,
-        );
+    final nv21Bytes = cameraImage.planes[0].bytes;
+    final image = image_lib.Image(width: width, height: height);
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        int yValue = nv21Bytes[y * width + x];
+
+        var color = image.getColor(yValue, yValue, yValue);
+        image.setPixel(x, y, color);
       }
     }
-
-    return outImg;
-    // Rotate the image by 90 degrees (or 270 degrees if needed)
-    // return imglib.copyRotate(outImg, -90); // Use -90 for a 270 degrees rotation
+    return image;
   }
 }
