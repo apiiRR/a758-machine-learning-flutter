@@ -1,4 +1,4 @@
-name: firebase_ml_app
+name: house_price_predictor_app
 description: "A new Flutter project."
 publish_to: "none"
 version: 0.1.0
@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   # todo-01-init-01: install dependencies
   provider: ^6.1.2
+  intl: ^0.20.2
   tflite_flutter: ^0.11.0
 
 dev_dependencies:
