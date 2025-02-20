@@ -1,4 +1,4 @@
-name: firebase_ml_app
+name: house_price_predictor_app
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  provider: ^6.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -17,5 +19,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/

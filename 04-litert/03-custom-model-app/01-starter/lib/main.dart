@@ -1,4 +1,4 @@
-import 'package:firebase_ml_app/ui/home_page.dart';
+import 'package:house_price_predictor_app/ui/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
