@@ -1,17 +1,15 @@
-import 'package:house_price_predictor_app/controller/controller.dart';
-import 'package:house_price_predictor_app/controller/house_detail_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:house_price_predictor_app/controller/house_detail_controller.dart';
+import 'package:house_price_predictor_app/controller/lite_rt_controller.dart';
 import 'package:house_price_predictor_app/model/house_detail.dart';
-import 'package:house_price_predictor_app/service/service.dart';
+import 'package:house_price_predictor_app/service/lite_rt_service.dart';
 import 'package:house_price_predictor_app/widget/form_field_counter.dart';
 import 'package:house_price_predictor_app/widget/form_field_free_number.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({
-    super.key,
-  });
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +19,15 @@ class HomePage extends StatelessWidget {
           // todo-03-controller-04: add dependency injection
           child: MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (context) => BedroomsProvider()),
-              ChangeNotifierProvider(create: (context) => BathroomsProvider()),
-              ChangeNotifierProvider(create: (context) => FloorsProvider()),
-              Provider(
-                create: (context) => LiteRtService()..initModel(),
-              ),
+              ChangeNotifierProvider(create: (context) => BedroomsController()),
               ChangeNotifierProvider(
-                create: (context) => LiteRtController(
-                  context.read(),
-                ),
-              )
+                create: (context) => BathroomsController(),
+              ),
+              ChangeNotifierProvider(create: (context) => FloorsController()),
+              Provider(create: (context) => LiteRtService()..initModel()),
+              ChangeNotifierProvider(
+                create: (context) => LiteRtController(context.read()),
+              ),
             ],
             child: _HomeBody(),
           ),
@@ -74,24 +70,27 @@ class _HomeBodyState extends State<_HomeBody> {
         SizedBox(height: 8),
         FormFieldCounter(
           titleField: "Floors",
-          number: context
-              .select<FloorsProvider, double>((provider) => provider.value),
-          onIncrement: () => context.read<FloorsProvider>().increment(),
-          onDecrement: () => context.read<FloorsProvider>().decrement(),
+          number: context.select<FloorsController, double>(
+            (provider) => provider.value,
+          ),
+          onIncrement: () => context.read<FloorsController>().increment(),
+          onDecrement: () => context.read<FloorsController>().decrement(),
         ),
         FormFieldCounter(
           titleField: "Bedrooms",
-          number: context
-              .select<BedroomsProvider, double>((provider) => provider.value),
-          onIncrement: () => context.read<BedroomsProvider>().increment(),
-          onDecrement: () => context.read<BedroomsProvider>().decrement(),
+          number: context.select<BedroomsController, double>(
+            (provider) => provider.value,
+          ),
+          onIncrement: () => context.read<BedroomsController>().increment(),
+          onDecrement: () => context.read<BedroomsController>().decrement(),
         ),
         FormFieldCounter(
           titleField: "Bathrooms",
-          number: context
-              .select<BathroomsProvider, double>((provider) => provider.value),
-          onIncrement: () => context.read<BathroomsProvider>().increment(),
-          onDecrement: () => context.read<BathroomsProvider>().decrement(),
+          number: context.select<BathroomsController, double>(
+            (provider) => provider.value,
+          ),
+          onIncrement: () => context.read<BathroomsController>().increment(),
+          onDecrement: () => context.read<BathroomsController>().decrement(),
         ),
         FormFieldFreeNumber(
           titleField: "Square Feet Lot",
@@ -102,9 +101,9 @@ class _HomeBodyState extends State<_HomeBody> {
           onPressed: () {
             // todo-04-ui-02: add callback to run the inference
             final houseDetail = HouseDetail(
-              floors: context.read<FloorsProvider>().value,
-              bedrooms: context.read<BedroomsProvider>().value,
-              bathrooms: context.read<BathroomsProvider>().value,
+              floors: context.read<FloorsController>().value,
+              bedrooms: context.read<BedroomsController>().value,
+              bathrooms: context.read<BathroomsController>().value,
               sqftLot: double.tryParse(sqftController.text) ?? 0,
             );
 

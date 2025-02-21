@@ -31,9 +31,9 @@ class FormFieldCounter extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   titleField,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: secondaryTextColor,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(color: secondaryTextColor),
                 ),
               ),
             ),
@@ -54,10 +54,10 @@ class FormFieldCounter extends StatelessWidget {
                         child: Text(
                           number.toStringAsFixed(2),
                           textAlign: TextAlign.center,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    color: secondaryTextColor,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: secondaryTextColor),
                         ),
                       ),
                     ),
@@ -103,10 +103,7 @@ class _ActionButton extends StatelessWidget {
           ),
           color: primaryTextColor,
         ),
-        child: Icon(
-          icon,
-          color: secondaryTextColor,
-        ),
+        child: Icon(icon, color: secondaryTextColor),
       ),
     );
   }

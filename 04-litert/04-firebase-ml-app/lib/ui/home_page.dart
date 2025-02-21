@@ -1,6 +1,6 @@
-import 'package:firebase_ml_app/controller/controller.dart';
-import 'package:firebase_ml_app/service/firebase_ml_service.dart';
-import 'package:firebase_ml_app/service/service.dart';
+import 'package:house_price_predictor_app/controller/controller.dart';
+import 'package:house_price_predictor_app/service/firebase_ml_service.dart';
+import 'package:house_price_predictor_app/service/service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

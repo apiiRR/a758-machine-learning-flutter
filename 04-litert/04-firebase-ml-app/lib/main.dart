@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_ml_app/firebase_options.dart';
-import 'package:firebase_ml_app/ui/home_page.dart';
+import 'package:house_price_predictor_app/firebase_options.dart';
+import 'package:house_price_predictor_app/ui/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

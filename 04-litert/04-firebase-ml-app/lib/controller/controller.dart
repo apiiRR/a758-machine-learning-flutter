@@ -1,4 +1,4 @@
-import 'package:firebase_ml_app/service/service.dart';
+import 'package:house_price_predictor_app/service/service.dart';
 import 'package:flutter/widgets.dart';
 
 class LiteRtController extends ChangeNotifier {

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart' show ChangeNotifier;
 
-class ValueHouseDetailProvider extends ChangeNotifier {
+class ValueHouseDetailController extends ChangeNotifier {
   double _value = 0;
 
   double get value => _value;
@@ -19,8 +19,8 @@ class ValueHouseDetailProvider extends ChangeNotifier {
   }
 }
 
-class BedroomsProvider extends ValueHouseDetailProvider {}
+class BedroomsController extends ValueHouseDetailController {}
 
-class BathroomsProvider extends ValueHouseDetailProvider {}
+class BathroomsController extends ValueHouseDetailController {}
 
-class FloorsProvider extends ValueHouseDetailProvider {}
+class FloorsController extends ValueHouseDetailController {}

@@ -1,5 +1,5 @@
 import 'package:house_price_predictor_app/model/house_detail.dart';
-import 'package:house_price_predictor_app/service/service.dart';
+import 'package:house_price_predictor_app/service/lite_rt_service.dart';
 import 'package:flutter/widgets.dart';
 
 // todo-03-controller-01: create a class

@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:firebase_ml_app/service/firebase_ml_service.dart';
+import 'package:house_price_predictor_app/service/firebase_ml_service.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class LiteRtService {

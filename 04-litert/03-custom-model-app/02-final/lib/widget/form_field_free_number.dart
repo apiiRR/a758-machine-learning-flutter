@@ -6,11 +6,7 @@ class FormFieldFreeNumber extends StatelessWidget {
   final Color primaryColor = Colors.grey.shade300;
   final Color secondaryColor = Colors.black;
 
-  FormFieldFreeNumber({
-    super.key,
-    required this.titleField,
-    this.controller,
-  });
+  FormFieldFreeNumber({super.key, required this.titleField, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +22,9 @@ class FormFieldFreeNumber extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   titleField,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: secondaryColor,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(color: secondaryColor),
                 ),
               ),
             ),
@@ -37,9 +33,9 @@ class FormFieldFreeNumber extends StatelessWidget {
               child: TextField(
                 controller: controller,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: secondaryColor,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(color: secondaryColor),
                 decoration: InputDecoration(
                   fillColor: primaryColor,
                   filled: true,
