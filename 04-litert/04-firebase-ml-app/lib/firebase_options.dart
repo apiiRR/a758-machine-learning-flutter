@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDUuSvNKS5Kzx16LNJ0Kgvj2INjouM5jJo',
-    appId: '1:513550843773:android:033ecc78cfcb589ba5d614',
+    appId: '1:513550843773:android:1f9f626a0c559613a5d614',
     messagingSenderId: '513550843773',
     projectId: 'fir-ml-project-dicoding',
     storageBucket: 'fir-ml-project-dicoding.firebasestorage.app',
@@ -59,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCJiTWqMy5niBYJvEVo3KhE2G_2UhU4rSg',
-    appId: '1:513550843773:ios:7cb069bab5fa002ea5d614',
+    appId: '1:513550843773:ios:1caf43e077de0093a5d614',
     messagingSenderId: '513550843773',
     projectId: 'fir-ml-project-dicoding',
     storageBucket: 'fir-ml-project-dicoding.firebasestorage.app',
-    iosBundleId: 'com.dicoding.firebaseMlApp',
+    iosBundleId: 'com.dicoding.housePricePredictorApp',
   );
 }

@@ -4,7 +4,7 @@ import 'package:house_price_predictor_app/ui/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  // todo-00: init firebase 
+  // todo-00: init firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

@@ -1,4 +1,5 @@
-import 'package:house_price_predictor_app/service/service.dart';
+import 'package:house_price_predictor_app/model/house_detail.dart';
+import 'package:house_price_predictor_app/service/lite_rt_service.dart';
 import 'package:flutter/widgets.dart';
 
 class LiteRtController extends ChangeNotifier {
@@ -10,8 +11,8 @@ class LiteRtController extends ChangeNotifier {
 
   double get number => _number;
 
-  void runInference(double value) {
-    _number = service.inference(value);
+  void runInference(HouseDetail value) {
+    _number = service.inference(value.values);
     notifyListeners();
   }
 

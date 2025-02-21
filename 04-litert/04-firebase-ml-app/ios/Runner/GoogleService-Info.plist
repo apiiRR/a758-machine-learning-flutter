@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.dicoding.firebaseMlApp</string>
+	<string>com.dicoding.housePricePredictorApp</string>
 	<key>PROJECT_ID</key>
 	<string>fir-ml-project-dicoding</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:513550843773:ios:7cb069bab5fa002ea5d614</string>
+	<string>1:513550843773:ios:1caf43e077de0093a5d614</string>
 </dict>
 </plist>

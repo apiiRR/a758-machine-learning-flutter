@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:513550843773:android:033ecc78cfcb589ba5d614",
+        "mobilesdk_app_id": "1:513550843773:android:1f9f626a0c559613a5d614",
         "android_client_info": {
-          "package_name": "com.dicoding.firebase_ml_app"
+          "package_name": "com.dicoding.house_price_predictor_app"
         }
       },
       "oauth_client": [],

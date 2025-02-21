@@ -61,10 +61,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "93dc4dd12f9b02c5767f235307f609e61ed9211047132d07f9e02c668f0bfc33"
+      sha256: "6a4ea0f1d533443c8afc3d809cd36a4e2b8f2e2e711f697974f55bb31d71d1b8"
       url: "https://pub.dev"
     source: hosted
-    version: "3.11.0"
+    version: "3.12.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -77,26 +77,26 @@ packages:
     dependency: transitive
     description:
       name: firebase_core_web
-      sha256: "0e13c80f0de8acaa5d0519cbe23c8b4cc138a2d5d508b5755c861bdfc9762678"
+      sha256: e47f5c2776de018fa19bc9f6f723df136bc75cdb164d64b65305babd715c8e41
       url: "https://pub.dev"
     source: hosted
-    version: "2.20.0"
+    version: "2.21.0"
   firebase_ml_model_downloader:
     dependency: "direct main"
     description:
       name: firebase_ml_model_downloader
-      sha256: d3f839ac5bea6c60892e70aacf3e9c249fc543c94aa2683a8e300b055cb11b91
+      sha256: c73384494576c7a4448f05b54d434864e8a91890f7a139516c835f40d662a26d
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.3"
+    version: "0.3.3+1"
   firebase_ml_model_downloader_platform_interface:
     dependency: transitive
     description:
       name: firebase_ml_model_downloader_platform_interface
-      sha256: "59a2f90db5ca28066622249c6820dc0dc1b33f256dafc24dd1780b3856599583"
+      sha256: a4f58c4f9c6b901da8853f47a67d6890a711ffc4a68235ca247d2db2480099e5
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.5+2"
+    version: "0.1.5+3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -120,6 +120,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.2"
   leak_tracker:
     dependency: transitive
     description:
