@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
                 create: (context) => BathroomsController(),
               ),
               ChangeNotifierProvider(create: (context) => FloorsController()),
-              // todo-07: add and inject FirebaseMlService to LiteRtService
+              // todo-06: add and inject FirebaseMlService to LiteRtService
               Provider(
                 create: (context) => FirebaseMlService(),
               ),
