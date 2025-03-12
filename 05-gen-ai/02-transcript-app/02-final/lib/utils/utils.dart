@@ -32,13 +32,12 @@ String durationToTime(Duration value) {
 
 int timecodeToSeconds(String timecode) {
   List<String> parts = timecode.split(':');
-  if (parts.length != 3) {
-    throw FormatException("Format timecode harus HH:MM:SS");
+  if (parts.length != 2) {
+    throw FormatException("Format timecode harus MM:SS");
   }
 
-  int hours = int.parse(parts[0]);
-  int minutes = int.parse(parts[1]);
-  int seconds = int.parse(parts[2]);
+  int minutes = int.parse(parts[0]);
+  int seconds = int.parse(parts[1]);
 
-  return (hours * 3600) + (minutes * 60) + seconds;
+  return (minutes * 60) + seconds;
 }

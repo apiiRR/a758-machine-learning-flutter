@@ -14,7 +14,7 @@ class GeminiService {
   GeminiService() {
     final apiKey = Env.geminiApiKey;
     model = GenerativeModel(
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.0-flash', // gemini-2.0-pro-exp-02-05',
       apiKey: apiKey,
       // todo-02-gemini-05: see the Google AI Studio code and copy the responseMimeType and responseSchema value.
       generationConfig: GenerationConfig(
@@ -46,7 +46,7 @@ class GeminiService {
   Future<String> generateTranscript(File file) async {
     var content = Content.multi([
       TextPart(
-        """Transkripsikan wawancara ini dengan format: timecode (HH:MM:SS) yang akurat, nama pembicara (jika diketahui, jika tidak gunakan Pembicara A, Pembicara B, dst.), dan teks percakapan. Pastikan timecode tepat pada setiap pergantian pembicara. Jika ada kesalahan timecode, koreksi secara otomatis.""",
+        """Bisakah Anda menyalin wawancara ini, dalam format timecode (MM:SS), nama pembicara, caption? Jika Anda mengenali nama pembicara, gunakan nama tersebut. Jika tidak, gunakan pembicara A, pembicara B, dst.""",
       ),
       DataPart(lookupMimeType(file.path)!, file.readAsBytesSync()),
     ]);

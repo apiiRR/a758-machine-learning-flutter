@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transcript_app/controller/gemini_controller.dart';
+import 'package:transcript_app/utils/utils.dart';
 import 'package:transcript_app/widget/audio_player_widget.dart';
 import 'package:transcript_app/widget/transcript_item.dart';
 
@@ -59,6 +60,7 @@ class _TranscriptPageState extends State<TranscriptPage> {
                       speakerName: segment.speaker,
                       timecode: segment.timecode,
                       caption: segment.caption,
+                      onTapped: () => onTimecodeChange(segment.timecode),
                     );
                   },
                   separatorBuilder: (context, index) {
@@ -71,5 +73,12 @@ class _TranscriptPageState extends State<TranscriptPage> {
         ],
       ),
     );
+  }
+
+  void onTimecodeChange(String timecode) async {
+    final secondTime = timecodeToSeconds(timecode);
+    final newPosition = Duration(seconds: secondTime);
+    await audioPlayer.seek(newPosition);
+    await audioPlayer.resume();
   }
 }
