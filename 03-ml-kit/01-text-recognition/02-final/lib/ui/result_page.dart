@@ -56,7 +56,9 @@ class _ResultBodyState extends State<_ResultBody> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: ImageWidget(),
+          child: ImageWidget(
+            imagePath: context.read<HomeProvider>().imagePath,
+          ),
         ),
         // todo-14: add a widget to copy text
         Align(
