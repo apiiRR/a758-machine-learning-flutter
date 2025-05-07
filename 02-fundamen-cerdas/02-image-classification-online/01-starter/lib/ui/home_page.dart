@@ -5,13 +5,15 @@ import 'package:online_image_classification/controller/home_provider.dart';
 import 'package:online_image_classification/util/widgets_extension.dart';
 import 'package:provider/provider.dart';
 
+import '../service/http_service.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => HomeProvider(),
+      create: (context) => HomeProvider(HttpService()),
       child: const _HomeView(),
     );
   }
@@ -32,8 +34,30 @@ class _HomeView extends StatelessWidget {
   }
 }
 
-class _HomeBody extends StatelessWidget {
+class _HomeBody extends StatefulWidget {
   const _HomeBody();
+
+  @override
+  State<_HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<_HomeBody> {
+  @override
+  void initState() {
+    super.initState();
+
+    final homeProvider = context.read<HomeProvider>();
+    homeProvider.addListener(() {
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      final message = homeProvider.message;
+
+      if (message != null) {
+        scaffoldMessenger.showSnackBar(SnackBar(
+          content: Text(message),
+        ));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +91,19 @@ class _HomeBody extends StatelessWidget {
                 spacing: 8,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  Consumer<HomeProvider>(builder: (context, value, child) {
+                    final uploadResponse = value.uploadResponse;
+                    final data = uploadResponse?.data;
+                    if (value.uploadResponse == null || data == null) {
+                      return SizedBox.shrink();
+                    }
+
+                    return Text(
+                      "${data?.result} - ${data?.confidenceScore.round()}%",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    );
+                  }),
                   Row(
                     spacing: 8,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,13 +131,17 @@ class _HomeBody extends StatelessWidget {
                     ].expanded(),
                   ),
                   FilledButton.tonal(
-                    onPressed: () {
-                      final scaffoldMessenger = ScaffoldMessenger.of(context);
-                      scaffoldMessenger.showSnackBar(
-                        SnackBar(content: Text("Feature under development 🙏")),
-                      );
-                    },
-                    child: const Text("Analyze"),
+                    onPressed: () => context.read<HomeProvider>().upload(),
+                    child: Consumer<HomeProvider>(
+                        builder: (context, value, child) {
+                      if (value.isUploading) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      return const Text("Analyze");
+                    }),
                   ),
                 ],
               ),
